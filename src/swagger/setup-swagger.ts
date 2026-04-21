@@ -1,10 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-/** Caminho da UI do Swagger (ex.: GET /api/docs). */
-export const SWAGGER_PATH = 'api/docs';
-
-export function setupSwagger(app: INestApplication): void {
+export function setupSwagger(app: INestApplication, swaggerPath: string): void {
   const config = new DocumentBuilder()
     .setTitle('Smart Dinner API')
     .setDescription('Documentação OpenAPI da API Smart Dinner.')
@@ -17,7 +14,7 @@ export function setupSwagger(app: INestApplication): void {
     operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
   });
 
-  SwaggerModule.setup(SWAGGER_PATH, app, document, {
+  SwaggerModule.setup(swaggerPath, app, document, {
     swaggerOptions: {
       persistAuthorization: true,
     },
